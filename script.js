@@ -227,6 +227,67 @@ function initGridOverlay() {
 }
 
 // ============================================
+// MAGNETIC HOVER EFFECT
+// ============================================
+
+function initMagneticHover() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+    
+    const magneticElements = document.querySelectorAll('.btn-primary, .nav-cta');
+    
+    magneticElements.forEach(element => {
+        element.addEventListener('mousemove', (e) => {
+            const rect = element.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            const moveX = x * 0.15;
+            const moveY = y * 0.15;
+            
+            element.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+        
+        element.addEventListener('mouseleave', () => {
+            element.style.transform = '';
+        });
+    });
+}
+
+// ============================================
+// SKILL HOVER INTERACTIONS
+// ============================================
+
+function initSkillHover() {
+    const skillTags = document.querySelectorAll('.skill-tag');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    skillTags.forEach(skillTag => {
+        const skillText = skillTag.textContent.trim().toLowerCase();
+        
+        skillTag.addEventListener('mouseenter', () => {
+            // Highlight related project cards
+            projectCards.forEach(card => {
+                const cardText = card.textContent.toLowerCase();
+                if (cardText.includes(skillText)) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1.02)';
+                } else {
+                    card.style.opacity = '0.5';
+                }
+            });
+        });
+        
+        skillTag.addEventListener('mouseleave', () => {
+            projectCards.forEach(card => {
+                card.style.opacity = '';
+                card.style.transform = '';
+            });
+        });
+    });
+}
+
+// ============================================
 // NAVIGATION
 // ============================================
 
@@ -296,7 +357,7 @@ function initHeroCanvas() {
     const ctx = canvas.getContext('2d');
     let animationId;
     let particles = [];
-    const particleCount = 50;
+    const particleCount = 60;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
     if (prefersReducedMotion) {
@@ -343,6 +404,7 @@ function initHeroCanvas() {
             this.vy = (Math.random() - 0.5) * 0.5;
             this.size = Math.random() * 2 + 1;
             this.opacity = Math.random() * 0.5 + 0.2;
+            this.color = Math.random() > 0.5 ? 'rgba(99, 102, 241' : 'rgba(6, 182, 212';
         }
         
         update() {
@@ -380,7 +442,7 @@ function initHeroCanvas() {
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(99, 102, 241, ${this.opacity})`;
+            ctx.fillStyle = `${this.color}, ${this.opacity})`;
             ctx.fill();
         }
     }
@@ -401,7 +463,8 @@ function initHeroCanvas() {
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(99, 102, 241, ${0.2 * (1 - distance / 150)})`;
+                    const opacity = 0.2 * (1 - distance / 150);
+                    ctx.strokeStyle = `rgba(99, 102, 241, ${opacity})`;
                     ctx.lineWidth = 0.5;
                     ctx.stroke();
                 }
@@ -589,8 +652,8 @@ function openProjectModal(project) {
         </div>
         ${project.links.demo || project.links.github ? `
         <div class="modal-links">
-            ${project.links.demo ? `<a href="${project.links.demo}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Demo</a>` : ''}
-            ${project.links.github ? `<a href="${project.links.github}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View Code</a>` : ''}
+            ${project.links.demo ? `<a href="${project.links.demo}" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><span>View Demo</span></a>` : ''}
+            ${project.links.github ? `<a href="${project.links.github}" target="_blank" rel="noopener noreferrer" class="btn btn-outline"><span>View Code</span></a>` : ''}
         </div>
         ` : ''}
     `;
@@ -712,7 +775,7 @@ function initHeadshotFallback() {
                 <circle cx="100" cy="100" r="100" fill="var(--bg-tertiary)"/>
                 <circle cx="100" cy="80" r="30" fill="var(--text-tertiary)"/>
                 <path d="M 50 160 Q 50 130 100 130 Q 150 130 150 160" fill="var(--text-tertiary)"/>
-                <text x="100" y="110" text-anchor="middle" fill="var(--accent)" font-size="60" font-weight="bold" font-family="var(--font-primary)">SG</text>
+                <text x="100" y="110" text-anchor="middle" fill="var(--accent-primary)" font-size="60" font-weight="bold" font-family="var(--font-primary)">SG</text>
             </svg>
         `;
         this.outerHTML = placeholder;
@@ -729,6 +792,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initGridOverlay();
     initNavigation();
     initHeroCanvas();
+    initMagneticHover();
+    initSkillHover();
     renderAwards();
     renderProjects();
     initProjectFilters();
