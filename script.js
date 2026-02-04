@@ -1,4 +1,67 @@
 // ============================================
+// AWARDS & CERTIFICATIONS DATA
+// ============================================
+
+const awardsData = [
+    {
+        id: 1,
+        title: "EDC Latin+ Community Leader Scholarship",
+        issuer: "Export Development Canada (EDC)",
+        year: "2024",
+        image: "assets/awards/edc-latin-scholarship.svg",
+        description: "Awarded for outstanding leadership and contributions to the Latin+ community in Canada."
+    },
+    {
+        id: 2,
+        title: "Schulich Leader Nominee",
+        issuer: "Schulich Leader Foundation",
+        year: "2024",
+        image: "assets/awards/schulich-leader.svg",
+        description: "Represents the top entrepreneurial-minded STEM student in their graduating class."
+    },
+    {
+        id: 3,
+        title: "Oakville Youth Education Award",
+        issuer: "Oakville Community Foundation",
+        year: "2024",
+        image: "assets/awards/oakville-youth.svg",
+        description: "Recognized for involvement, integrity, improvement, and inclusion in school and community activities."
+    },
+    {
+        id: 4,
+        title: "Python for Data Science",
+        issuer: "IBM",
+        year: "2024",
+        image: "assets/certs/ibm-python.svg",
+        description: "Built proficiency in Python scripting, data cleaning, and exploratory analysis using Pandas, NumPy, and Jupyter notebooks."
+    },
+    {
+        id: 5,
+        title: "CS50x",
+        issuer: "Harvard University",
+        year: "2023",
+        image: "assets/certs/harvard-cs50.svg",
+        description: "Strengthened computational problem-solving skills and database fundamentals (SQL, Python, C)."
+    },
+    {
+        id: 6,
+        title: "PowerBI Beginner",
+        issuer: "Dimensional Strategies Inc.",
+        year: "2024",
+        image: "assets/certs/powerbi-beginner.svg",
+        description: "Gained foundational skills in data modeling and cleaning, KPI visualization, DAX, and dashboard development."
+    },
+    {
+        id: 7,
+        title: "Mendix Rapid Developer",
+        issuer: "Mendix",
+        year: "2024",
+        image: "assets/certs/mendix-rapid.svg",
+        description: "Applied agile methodologies and application lifecycle management (ALM) principles in low-code application development."
+    }
+];
+
+// ============================================
 // PROJECTS DATA
 // ============================================
 
@@ -115,6 +178,55 @@ function updateThemeIcon(theme) {
 }
 
 // ============================================
+// SCROLL PROGRESS INDICATOR
+// ============================================
+
+function initScrollProgress() {
+    const progressBar = document.getElementById('scroll-progress');
+    if (!progressBar) return;
+    
+    function updateProgress() {
+        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (window.scrollY / windowHeight) * 100;
+        progressBar.style.width = `${scrolled}%`;
+        progressBar.setAttribute('aria-valuenow', Math.round(scrolled));
+    }
+    
+    // Throttle scroll events
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                updateProgress();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+    
+    updateProgress();
+}
+
+// ============================================
+// GRID OVERLAY EASTER EGG
+// ============================================
+
+function initGridOverlay() {
+    const logo = document.getElementById('nav-logo');
+    const overlay = document.getElementById('grid-overlay');
+    
+    if (!logo || !overlay) return;
+    
+    let isActive = false;
+    
+    logo.addEventListener('click', (e) => {
+        e.preventDefault();
+        isActive = !isActive;
+        overlay.classList.toggle('active', isActive);
+    });
+}
+
+// ============================================
 // NAVIGATION
 // ============================================
 
@@ -170,11 +282,11 @@ function initNavigation() {
         }
         
         lastScroll = currentScroll;
-    });
+    }, { passive: true });
 }
 
 // ============================================
-// HERO CANVAS ANIMATION
+// HERO CANVAS ANIMATION (Cursor-Reactive)
 // ============================================
 
 function initHeroCanvas() {
@@ -192,6 +304,11 @@ function initHeroCanvas() {
         return;
     }
     
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetMouseX = 0;
+    let targetMouseY = 0;
+    
     function resizeCanvas() {
         canvas.width = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
@@ -199,6 +316,20 @@ function initHeroCanvas() {
     
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
+    
+    // Throttled mouse move handler
+    let mouseMoveTimeout;
+    canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        targetMouseX = e.clientX - rect.left;
+        targetMouseY = e.clientY - rect.top;
+        
+        clearTimeout(mouseMoveTimeout);
+        mouseMoveTimeout = setTimeout(() => {
+            mouseX = targetMouseX;
+            mouseY = targetMouseY;
+        }, 50);
+    }, { passive: true });
     
     class Particle {
         constructor() {
@@ -215,11 +346,35 @@ function initHeroCanvas() {
         }
         
         update() {
+            // React to mouse position
+            const dx = mouseX - this.x;
+            const dy = mouseY - this.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const maxDistance = 150;
+            
+            if (distance < maxDistance && distance > 0) {
+                const force = (maxDistance - distance) / maxDistance;
+                this.vx += (dx / distance) * force * 0.02;
+                this.vy += (dy / distance) * force * 0.02;
+            }
+            
+            // Apply velocity
             this.x += this.vx;
             this.y += this.vy;
             
-            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            // Damping
+            this.vx *= 0.98;
+            this.vy *= 0.98;
+            
+            // Boundary check
+            if (this.x < 0 || this.x > canvas.width) {
+                this.vx *= -1;
+                this.x = Math.max(0, Math.min(canvas.width, this.x));
+            }
+            if (this.y < 0 || this.y > canvas.height) {
+                this.vy *= -1;
+                this.y = Math.max(0, Math.min(canvas.height, this.y));
+            }
         }
         
         draw() {
@@ -276,6 +431,43 @@ function initHeroCanvas() {
         } else {
             animate();
         }
+    });
+}
+
+// ============================================
+// AWARDS & CERTIFICATIONS
+// ============================================
+
+function renderAwards() {
+    const grid = document.getElementById('awards-grid');
+    if (!grid) return;
+    
+    grid.innerHTML = '';
+    
+    awardsData.forEach(award => {
+        const card = document.createElement('div');
+        card.className = 'award-card';
+        
+        const hasImage = award.image && award.image !== '';
+        const imageHtml = hasImage 
+            ? `<img src="${award.image}" alt="${award.title}" class="award-image" onerror="this.parentElement.querySelector('.award-badge').style.display='flex'; this.style.display='none';">`
+            : '';
+        
+        const badgeHtml = hasImage
+            ? `<div class="award-badge" style="display: none;">${award.title.charAt(0)}</div>`
+            : `<div class="award-badge">${award.title.charAt(0)}</div>`;
+        
+        card.innerHTML = `
+            ${imageHtml}
+            ${badgeHtml}
+            <div>
+                <h3 class="award-title">${award.title}</h3>
+                <p class="award-issuer">${award.issuer}</p>
+                <p class="award-year">${award.year}</p>
+            </div>
+        `;
+        
+        grid.appendChild(card);
     });
 }
 
@@ -460,42 +652,70 @@ function initProjectModal() {
 }
 
 // ============================================
-// CONTACT FORM
+// COPY TO CLIPBOARD
 // ============================================
 
-function initContactForm() {
-    const form = document.getElementById('contact-form');
-    if (!form) return;
+function initCopyToClipboard() {
+    const copyButtons = document.querySelectorAll('.copy-btn');
     
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const formData = new FormData(form);
-        const data = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            subject: formData.get('subject'),
-            message: formData.get('message')
-        };
-        
-        // Create mailto link as fallback
-        const mailtoLink = `mailto:santiago.guzare@gmail.com?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(`Name: ${data.name}\nEmail: ${data.email}\n\n${data.message}`)}`;
-        
-        // In a real application, you would send this to a backend
-        // For now, we'll use mailto as a fallback
-        window.location.href = mailtoLink;
-        
-        // Show success message (optional)
-        const submitButton = form.querySelector('button[type="submit"]');
-        const originalText = submitButton.textContent;
-        submitButton.textContent = 'Message Sent!';
-        submitButton.disabled = true;
-        
-        setTimeout(() => {
-            submitButton.textContent = originalText;
-            submitButton.disabled = false;
-            form.reset();
-        }, 3000);
+    copyButtons.forEach(button => {
+        button.addEventListener('click', async () => {
+            const textToCopy = button.getAttribute('data-copy');
+            if (!textToCopy) return;
+            
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+                
+                // Visual feedback
+                const originalHTML = button.innerHTML;
+                button.classList.add('copied');
+                button.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+                
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = originalHTML;
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    button.classList.add('copied');
+                    setTimeout(() => button.classList.remove('copied'), 2000);
+                } catch (fallbackErr) {
+                    console.error('Fallback copy failed:', fallbackErr);
+                }
+                document.body.removeChild(textArea);
+            }
+        });
+    });
+}
+
+// ============================================
+// HEADSHOT IMAGE FALLBACK
+// ============================================
+
+function initHeadshotFallback() {
+    const headshotImg = document.getElementById('headshot-img');
+    if (!headshotImg) return;
+    
+    headshotImg.addEventListener('error', function() {
+        // Create a placeholder SVG if image fails to load
+        const placeholder = `
+            <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="100" fill="var(--bg-tertiary)"/>
+                <circle cx="100" cy="80" r="30" fill="var(--text-tertiary)"/>
+                <path d="M 50 160 Q 50 130 100 130 Q 150 130 150 160" fill="var(--text-tertiary)"/>
+                <text x="100" y="110" text-anchor="middle" fill="var(--accent)" font-size="60" font-weight="bold" font-family="var(--font-primary)">SG</text>
+            </svg>
+        `;
+        this.outerHTML = placeholder;
     });
 }
 
@@ -505,12 +725,16 @@ function initContactForm() {
 
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
+    initScrollProgress();
+    initGridOverlay();
     initNavigation();
     initHeroCanvas();
+    renderAwards();
     renderProjects();
     initProjectFilters();
     initProjectModal();
-    initContactForm();
+    initCopyToClipboard();
+    initHeadshotFallback();
     
     // Theme toggle
     const themeToggle = document.getElementById('theme-toggle');
@@ -543,7 +767,7 @@ function debounce(func, wait) {
     };
 }
 
-// Export projects data for potential external use
+// Export data for potential external use
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { projectsData };
+    module.exports = { projectsData, awardsData };
 }

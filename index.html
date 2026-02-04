@@ -12,6 +12,7 @@
     <meta property="og:url" content="https://sanguzare.github.io/">
     <meta property="og:title" content="Santiago Guzman - Data Portfolio">
     <meta property="og:description" content="Data Analyst & Business Intelligence Professional specializing in analytics, dashboards, and automation.">
+    <meta property="og:image" content="https://sanguzare.github.io/assets/headshot-placeholder.svg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
@@ -26,19 +27,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scroll-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Page scroll progress"></div>
+
+    <!-- Grid Overlay Easter Egg -->
+    <div class="grid-overlay" id="grid-overlay" aria-hidden="true"></div>
+
     <!-- Navigation -->
     <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
-            <a href="#hero" class="nav-logo" aria-label="Home">SG</a>
+            <a href="#hero" class="nav-logo" id="nav-logo" aria-label="Home">SG</a>
             <ul class="nav-menu" id="nav-menu">
-                <li><a href="#impact" class="nav-link">Impact</a></li>
+                <li><a href="#awards" class="nav-link">Awards</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
                 <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#contact" class="nav-link nav-cta">Contact</a></li>
             </ul>
-            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
                 <span class="theme-icon" id="theme-icon">🌙</span>
             </button>
             <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -53,20 +61,26 @@
     <section class="hero" id="hero">
         <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
         <div class="hero-content">
-            <div class="hero-badge">Currently seeking: Data Analyst, BI Analyst, Data Engineering roles</div>
-            <h1 class="hero-title">
-                <span class="hero-name">Santiago Guzman</span>
-                <span class="hero-role">Data Analyst & Business Intelligence Professional</span>
-            </h1>
-            <p class="hero-description">
-                Transforming raw data into actionable insights through automated dashboards, 
-                advanced analytics, and intelligent automation. Delivering measurable business impact 
-                with Python, Power BI, and cloud technologies.
-            </p>
-            <div class="hero-actions">
-                <a href="#projects" class="btn btn-primary">View Projects</a>
-                <a href="assets/resume.pdf" class="btn btn-secondary" download>Download Resume</a>
-                <a href="#contact" class="btn btn-outline">Contact Me</a>
+            <div class="hero-main">
+                <div class="hero-headshot">
+                    <img src="assets/headshot-placeholder.svg" alt="Santiago Guzman" class="headshot-img" id="headshot-img" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\'%3E%3Ccircle cx=\'100\' cy=\'100\' r=\'100\' fill=\'%23131829\'/%3E%3Ctext x=\'100\' y=\'110\' text-anchor=\'middle\' font-size=\'60\' fill=\'%236366f1\'%3ESG%3C/text%3E%3C/svg%3E'">
+                </div>
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="hero-name">Santiago Guzman</span>
+                        <span class="hero-role">Data Analyst & Business Intelligence Professional</span>
+                    </h1>
+                    <p class="hero-description">
+                        Transforming raw data into actionable insights through automated dashboards, 
+                        advanced analytics, and intelligent automation. Delivering measurable business impact 
+                        with Python, Power BI, and cloud technologies.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary">View Projects</a>
+                        <a href="Santiago Resume-3.pdf" class="btn btn-secondary" download>Resume (PDF)</a>
+                        <a href="#contact" class="btn btn-outline">Contact Info</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="scroll-indicator" aria-hidden="true">
@@ -77,42 +91,13 @@
         </div>
     </section>
 
-    <!-- Impact Snapshot -->
-    <section class="impact" id="impact">
+    <!-- Awards & Certifications -->
+    <section class="awards" id="awards">
         <div class="container">
-            <h2 class="section-title">Impact Snapshot</h2>
-            <p class="section-subtitle">Measurable outcomes from my work</p>
-            <div class="impact-grid">
-                <div class="impact-card">
-                    <div class="impact-icon">⏱️</div>
-                    <div class="impact-value">15+</div>
-                    <div class="impact-label">Hours Saved Monthly</div>
-                    <div class="impact-desc">Automated Power BI dashboard eliminated manual reporting</div>
-                </div>
-                <div class="impact-card">
-                    <div class="impact-icon">💰</div>
-                    <div class="impact-value">25%</div>
-                    <div class="impact-label">Cost Reduction</div>
-                    <div class="impact-desc">Optimized $40K+ IT infrastructure quote through analysis</div>
-                </div>
-                <div class="impact-card">
-                    <div class="impact-icon">⚡</div>
-                    <div class="impact-value">98%+</div>
-                    <div class="impact-label">Response Time Improvement</div>
-                    <div class="impact-desc">AI chatbots reduced response times dramatically</div>
-                </div>
-                <div class="impact-card">
-                    <div class="impact-icon">📊</div>
-                    <div class="impact-value">150+</div>
-                    <div class="impact-label">Records Imported</div>
-                    <div class="impact-desc">Enhanced CRM data integrity in Salesforce</div>
-                </div>
-                <div class="impact-card">
-                    <div class="impact-icon">📈</div>
-                    <div class="impact-value">30%+</div>
-                    <div class="impact-label">Warranty Attach Rate</div>
-                    <div class="impact-desc">Achieved through technical solutions and inventory management</div>
-                </div>
+            <h2 class="section-title">Awards & Certifications</h2>
+            <p class="section-subtitle">Recognition and professional credentials</p>
+            <div class="awards-grid" id="awards-grid">
+                <!-- Awards will be rendered here by JavaScript -->
             </div>
         </div>
     </section>
@@ -169,18 +154,39 @@
                     <div class="skill-category">
                         <h3 class="skill-category-title">Languages</h3>
                         <div class="skill-tags">
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">SQL</span>
-                            <span class="skill-tag">C++</span>
-                            <span class="skill-tag">C</span>
+                            <span class="skill-tag">
+                                <img src="assets/icons/python.svg" alt="Python" class="skill-icon" onerror="this.style.display='none'">
+                                Python
+                            </span>
+                            <span class="skill-tag">
+                                <img src="assets/icons/sql.svg" alt="SQL" class="skill-icon" onerror="this.style.display='none'">
+                                SQL
+                            </span>
+                            <span class="skill-tag">
+                                <img src="assets/icons/cpp.svg" alt="C++" class="skill-icon" onerror="this.style.display='none'">
+                                C++
+                            </span>
+                            <span class="skill-tag">
+                                <img src="assets/icons/c.svg" alt="C" class="skill-icon" onerror="this.style.display='none'">
+                                C
+                            </span>
                         </div>
                     </div>
                     <div class="skill-category">
                         <h3 class="skill-category-title">Data & Analytics</h3>
                         <div class="skill-tags">
-                            <span class="skill-tag">Pandas</span>
-                            <span class="skill-tag">NumPy</span>
-                            <span class="skill-tag">Jupyter</span>
+                            <span class="skill-tag">
+                                <img src="assets/icons/pandas.svg" alt="Pandas" class="skill-icon" onerror="this.style.display='none'">
+                                Pandas
+                            </span>
+                            <span class="skill-tag">
+                                <img src="assets/icons/numpy.svg" alt="NumPy" class="skill-icon" onerror="this.style.display='none'">
+                                NumPy
+                            </span>
+                            <span class="skill-tag">
+                                <img src="assets/icons/jupyter.svg" alt="Jupyter" class="skill-icon" onerror="this.style.display='none'">
+                                Jupyter
+                            </span>
                             <span class="skill-tag">Data Cleaning</span>
                             <span class="skill-tag">Exploratory Analysis</span>
                         </div>
@@ -188,7 +194,10 @@
                     <div class="skill-category">
                         <h3 class="skill-category-title">Business Intelligence</h3>
                         <div class="skill-tags">
-                            <span class="skill-tag">Power BI</span>
+                            <span class="skill-tag">
+                                <img src="assets/icons/powerbi.svg" alt="Power BI" class="skill-icon" onerror="this.style.display='none'">
+                                Power BI
+                            </span>
                             <span class="skill-tag">DAX</span>
                             <span class="skill-tag">Data Modeling</span>
                             <span class="skill-tag">KPI Visualization</span>
@@ -198,10 +207,22 @@
                     <div class="skill-category">
                         <h3 class="skill-category-title">Cloud & Tools</h3>
                         <div class="skill-tags">
-                            <span class="skill-tag">Salesforce</span>
-                            <span class="skill-tag">Microsoft Excel</span>
-                            <span class="skill-tag">Git</span>
-                            <span class="skill-tag">GitHub</span>
+                            <span class="skill-tag">
+                                <img src="assets/icons/salesforce.svg" alt="Salesforce" class="skill-icon" onerror="this.style.display='none'">
+                                Salesforce
+                            </span>
+                            <span class="skill-tag">
+                                <img src="assets/icons/excel.svg" alt="Excel" class="skill-icon" onerror="this.style.display='none'">
+                                Microsoft Excel
+                            </span>
+                            <span class="skill-tag">
+                                <img src="assets/icons/git.svg" alt="Git" class="skill-icon" onerror="this.style.display='none'">
+                                Git
+                            </span>
+                            <span class="skill-tag">
+                                <img src="assets/icons/github.svg" alt="GitHub" class="skill-icon" onerror="this.style.display='none'">
+                                GitHub
+                            </span>
                             <span class="skill-tag">GNU/Linux</span>
                         </div>
                     </div>
@@ -234,19 +255,24 @@
         </div>
     </section>
 
-    <!-- Experience & Education -->
+    <!-- Work Experience -->
     <section class="experience" id="experience">
         <div class="container">
-            <h2 class="section-title">Experience & Education</h2>
+            <h2 class="section-title">Work Experience</h2>
             
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="timeline-header">
-                            <h3 class="timeline-title">Business Development Intern</h3>
-                            <span class="timeline-company">Burlington Economic Development & Tourism</span>
-                            <span class="timeline-date">May 2025 – Aug 2025</span>
+                            <div class="timeline-logo-wrapper">
+                                <img src="assets/logos/burlington-edt.svg" alt="Burlington Economic Development & Tourism" class="timeline-logo" onerror="this.style.display='none'">
+                            </div>
+                            <div class="timeline-header-text">
+                                <h3 class="timeline-title">Business Development Intern</h3>
+                                <span class="timeline-company">Burlington Economic Development & Tourism</span>
+                                <span class="timeline-date">May 2025 – Aug 2025</span>
+                            </div>
                         </div>
                         <div class="timeline-location">Burlington, ON</div>
                         <ul class="timeline-bullets">
@@ -260,9 +286,14 @@
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="timeline-header">
-                            <h3 class="timeline-title">Operations & Data Support (Co-op)</h3>
-                            <span class="timeline-company">TechPlace</span>
-                            <span class="timeline-date">Oct 2023 – Jan 2024</span>
+                            <div class="timeline-logo-wrapper">
+                                <img src="assets/logos/techplace.svg" alt="TechPlace" class="timeline-logo" onerror="this.style.display='none'">
+                            </div>
+                            <div class="timeline-header-text">
+                                <h3 class="timeline-title">Operations & Data Support (Co-op)</h3>
+                                <span class="timeline-company">TechPlace</span>
+                                <span class="timeline-date">Oct 2023 – Jan 2024</span>
+                            </div>
                         </div>
                         <div class="timeline-location">Burlington, ON</div>
                         <ul class="timeline-bullets">
@@ -276,9 +307,14 @@
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="timeline-header">
-                            <h3 class="timeline-title">Technology Associate</h3>
-                            <span class="timeline-company">Staples Canada</span>
-                            <span class="timeline-date">Jul 2022 – Oct 2023</span>
+                            <div class="timeline-logo-wrapper">
+                                <img src="assets/logos/staples.svg" alt="Staples Canada" class="timeline-logo" onerror="this.style.display='none'">
+                            </div>
+                            <div class="timeline-header-text">
+                                <h3 class="timeline-title">Technology Associate</h3>
+                                <span class="timeline-company">Staples Canada</span>
+                                <span class="timeline-date">Jul 2022 – Oct 2023</span>
+                            </div>
                         </div>
                         <div class="timeline-location">Oakville, ON</div>
                         <ul class="timeline-bullets">
@@ -286,14 +322,28 @@
                         </ul>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Education -->
+    <section class="education" id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            
+            <div class="timeline">
                 <div class="timeline-item timeline-education">
                     <div class="timeline-marker timeline-marker-education"></div>
                     <div class="timeline-content">
                         <div class="timeline-header">
-                            <h3 class="timeline-title">Bachelor of Computer Science - Business Specialization</h3>
-                            <span class="timeline-company">University of Waterloo</span>
-                            <span class="timeline-date">Sep 2024 – Jun 2028</span>
+                            <div class="timeline-logo-wrapper">
+                                <img src="assets/logos/uwaterloo.svg" alt="University of Waterloo" class="timeline-logo" onerror="this.style.display='none'">
+                            </div>
+                            <div class="timeline-header-text">
+                                <h3 class="timeline-title">Bachelor of Computer Science - Business Specialization</h3>
+                                <span class="timeline-company">University of Waterloo</span>
+                                <span class="timeline-date">Sep 2024 – Jun 2028</span>
+                            </div>
                         </div>
                         <div class="timeline-location">Waterloo, ON</div>
                         <div class="timeline-gpa">Cumulative GPA: 3.7/4.0</div>
@@ -325,8 +375,8 @@
                     </p>
                     <p>
                         Currently pursuing my Bachelor's in Computer Science with a Business Specialization 
-                        at the University of Waterloo, I'm seeking roles in data analysis, business intelligence, 
-                        and data engineering where I can continue to grow and contribute to data-driven organizations.
+                        at the University of Waterloo, I'm building expertise in data analysis, business intelligence, 
+                        and data engineering to contribute to data-driven organizations.
                     </p>
                     <div class="about-values">
                         <h3>What I Value</h3>
@@ -345,66 +395,79 @@
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <p class="section-subtitle">Let's discuss how data can drive your business forward</p>
+            <h2 class="section-title">Contact</h2>
+            <p class="section-subtitle">Let's connect and discuss data-driven opportunities</p>
             
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">📧</div>
-                        <div>
-                            <h3>Email</h3>
-                            <a href="mailto:santiago.guzare@gmail.com">santiago.guzare@gmail.com</a>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon-wrapper">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </div>
+                    <div class="contact-info">
+                        <h3>Email</h3>
+                        <div class="contact-value">
+                            <a href="mailto:santiago.guzare@gmail.com" id="contact-email">santiago.guzare@gmail.com</a>
+                            <button class="copy-btn" data-copy="santiago.guzare@gmail.com" aria-label="Copy email to clipboard">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">📱</div>
-                        <div>
-                            <h3>Phone</h3>
-                            <a href="tel:+12894009103">(289) 400-9103</a>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon-wrapper">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </div>
+                    <div class="contact-info">
+                        <h3>LinkedIn</h3>
+                        <div class="contact-value">
+                            <a href="https://www.linkedin.com/in/santiagoguz/" target="_blank" rel="noopener noreferrer" id="contact-linkedin">linkedin.com/in/santiagoguz</a>
+                            <button class="copy-btn" data-copy="https://www.linkedin.com/in/santiagoguz/" aria-label="Copy LinkedIn URL to clipboard">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">📍</div>
-                        <div>
-                            <h3>Location</h3>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon-wrapper">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </div>
+                    <div class="contact-info">
+                        <h3>GitHub</h3>
+                        <div class="contact-value">
+                            <a href="https://github.com/sanguzare" target="_blank" rel="noopener noreferrer">github.com/sanguzare</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon-wrapper">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
+                    <div class="contact-info">
+                        <h3>Location</h3>
+                        <div class="contact-value">
                             <p>Oakville, ON, Canada</p>
                         </div>
                     </div>
-                    <div class="contact-social">
-                        <a href="https://www.linkedin.com/in/santiagoguz/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
-                        </a>
-                        <a href="https://github.com/sanguzare" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                            </svg>
-                        </a>
-                    </div>
                 </div>
-                
-                <form class="contact-form" id="contact-form" aria-label="Contact form">
-                    <div class="form-group">
-                        <label for="form-name">Name</label>
-                        <input type="text" id="form-name" name="name" required aria-required="true">
-                    </div>
-                    <div class="form-group">
-                        <label for="form-email">Email</label>
-                        <input type="email" id="form-email" name="email" required aria-required="true">
-                    </div>
-                    <div class="form-group">
-                        <label for="form-subject">Subject</label>
-                        <input type="text" id="form-subject" name="subject" required aria-required="true">
-                    </div>
-                    <div class="form-group">
-                        <label for="form-message">Message</label>
-                        <textarea id="form-message" name="message" rows="5" required aria-required="true"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                    <p class="form-note">Or email directly: <a href="mailto:santiago.guzare@gmail.com">santiago.guzare@gmail.com</a></p>
-                </form>
             </div>
         </div>
     </section>
@@ -412,9 +475,10 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Santiago Guzman. Built with vanilla HTML, CSS, and JavaScript.</p>
+            <p>&copy; 2025 Santiago Guzman. Built with HTML, CSS, and JavaScript.</p>
+            <p class="footer-hint">💡 Tip: Click the logo to toggle grid overlay</p>
             <p class="footer-links">
-                <a href="assets/resume.pdf" download>Resume</a>
+                <a href="Santiago Resume-3.pdf" download>Resume</a>
                 <a href="https://www.linkedin.com/in/santiagoguz/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                 <a href="https://github.com/sanguzare" target="_blank" rel="noopener noreferrer">GitHub</a>
             </p>
